@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dois Meses com Minha Vida</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans', sans-serif;
+      background: linear-gradient(135deg, #f7c1f7, #cba4ff);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 0 0 10px #ff99ff;
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #ffe6ff;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(255, 153, 255, 2);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card h2 {
+      color: #ffccff;
+    }
+
+    /* ---- CARROSSEL ---- */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 1000px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 1000px;
+      object-fit: cover;
+      border-radius: 15px;
+      display: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2em;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 5px 12px;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .arrow:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .arrow.left {
+      left: 10px;
+    }
+
+    .arrow.right {
+      right: 10px;
+    }
+
+    /* ---- BOTÃO DE MÚSICA ---- */
+    .love-button {
+      background-color: #ff99ff;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff99ff;
+      transition: all 0.3s ease;
+    }
+
+    .love-button:hover {
+      background-color: #d279d2;
+      box-shadow: 0 0 25px #ffb3ff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: #ffe6ff;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dois Meses com Minha Vida 💕</h1>
+    <p>Uma história leve, divertida e cheia de amor.</p>
+    <audio id="player" src="musica/Belo - Tudo Mudou (Todo Cambió) (Áudio Oficial) - BeloVEVO (youtube).mp3"></audio>
+    <button id="playButton" class="love-button">Tocar Nossa Música 🎶</button>
+  </header>
+
+  <section>
+    <div class="timeline">
+
+      <div class="card">
+        <h1>Como Tudo Começou</h1>
+        <p>Foi em um momento simples, mas cheio de significado. Desde o primeiro sorriso, algo em mim disse: “é ela”.</p>
+        <div class="carousel" data-images="foto1a.jpg,foto1b.jpg,foto1c.jpg">
+          <button class="arrow left">◀</button>
+          <button class="arrow right">▶</button>
+        </div>
+        
+      </div>
+
+      <div class="card">
+        <h1>Nossos Momentos</h1>
+        <p>Entre risadas, conversas sem fim e olhares que falam mais do que palavras — cada dia contigo é uma nova lembrança boa.</p>
+        <div class="carousel" data-images="foto2a.jpg,foto2b.jpg,foto2c.jpg">
+          <button class="arrow left">◀</button>
+          <button class="arrow right">▶</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h1>Dois Meses de Nós</h1>
+                <p>Dois meses que parecem muito mais... porque com você, o tempo corre de um jeito diferente — leve, feliz e cheio de cor. 💗</p>
+
+        <div class="carousel" data-images="foto3a.jpg,foto3b.jpg,foto3c.jpg">
+          <button class="arrow left">◀</button>
+          <button class="arrow right">▶</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    
+    <p>Te amo, Minha Vida 💖</p>
+  </footer>
+
+  <script>
+    /* --- Música --- */
+    const player = document.getElementById('player');
+    const playButton = document.getElementById('playButton');
+    let isPlaying = false;
+
+    playButton.addEventListener('click', () => {
+      if (!isPlaying) {
+        player.muted = false;
+        player.play();
+        playButton.textContent = 'Pausar Música ⏸️';
+      } else {
+        player.pause();
+        playButton.textContent = 'Tocar Nossa Música 🎶';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    /* --- Carrossel de fotos --- */
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      const images = carousel.getAttribute('data-images').split(',');
+      let currentIndex = 0;
+
+      const imgElements = images.map((src, i) => {
+        const img = document.createElement('img');
+        img.src = 'imagens/' + src.trim();
+        if (i === 0) img.classList.add('active');
+        carousel.appendChild(img);
+        return img;
+      });
+
+      const leftBtn = carousel.querySelector('.arrow.left');
+      const rightBtn = carousel.querySelector('.arrow.right');
+
+      leftBtn.addEventListener('click', () => {
+        imgElements[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex - 1 + imgElements.length) % imgElements.length;
+        imgElements[currentIndex].classList.add('active');
+      });
+
+      rightBtn.addEventListener('click', () => {
+        imgElements[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % imgElements.length;
+        imgElements[currentIndex].classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

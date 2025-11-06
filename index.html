@@ -66,27 +66,31 @@
     }
 
     /* ---- CARROSSEL ---- */
-    .carousel {
-      position: relative;
-      width: 100%;
-      height: 1000px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      border-radius: 15px;
-    }
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 9 / 16; /* mantém proporção de tela de celular */
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 15px;
+}
 
-    .carousel img {
-      width: 100%;
-      height: 1000px;
-      object-fit: cover;
-      border-radius: 15px;
-      display: none;
-      transition: opacity 0.5s ease;
-    }
+/* As imagens agora se ajustam perfeitamente à tela */
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* mostra a imagem inteira, sem cortar */
+  border-radius: 15px;
+  display: none;
+  transition: opacity 0.5s ease;
+  background-color: #000; /* fundo para fotos menores que o contêiner */
+}
 
-    .carousel img.active {
-      display: block;
-    }
+/* imagem ativa */
+.carousel img.active {
+  display: block;
+}
 
     .arrow {
       position: absolute;
